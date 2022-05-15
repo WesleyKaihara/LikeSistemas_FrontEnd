@@ -1,0 +1,11 @@
+.produto{
+  display: flex;
+  gap: 2vh;
+  background-color: #f1f1f1;
+  border: 1px solid #ccc;
+  .coluna{
+    display: flex;
+    align-items: center;
+    gap: 1vh;
+  }
+}
