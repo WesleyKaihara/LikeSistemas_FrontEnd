@@ -1,11 +1,11 @@
-import { useState } from 'react';
+import { useEffect, useState } from 'react';
 import style from './style.module.scss';
 
 
-export default function Produto(item) {
+export default function Produto(props) {
 
   //desestruturação do produto
-  const { NOME, VALOR, SUBCATEGORIA } = item.produto;
+  const { ID, NOME, VALOR, SUBCATEGORIA } = props.produto;
 
   //estado para manipulação da quantidade de cada produto
   const [quantidade, setQuantidade] = useState(0);
@@ -13,15 +13,16 @@ export default function Produto(item) {
   //Adicionar valor a quantidade
   function addQuantidade() {
     setQuantidade(quantidade + 1);
-    item.AddValorProdutos(parseFloat(VALOR));
+    props.AddValorProdutos(parseFloat(VALOR), quantidade + 1, ID);
   }
 
   //remover valor de quantidade
   function removeQuantidade() {
-    setQuantidade(quantidade - 1);
-    item.AddValorProdutos(parseFloat(-VALOR));
+    if (quantidade > 0) {
+      setQuantidade(quantidade - 1);
+      props.AddValorProdutos(parseFloat(-VALOR), quantidade - 1, ID);
+    }
   }
-
 
   return (
     <div className={style.produto} >
@@ -39,9 +40,9 @@ export default function Produto(item) {
       </div>
 
       <div className={style.coluna}>
-        <button onClick={removeQuantidade} disabled={quantidade === 0}> - </button>
+        <p onClick={removeQuantidade}> - </p>
         <h2>{quantidade}</h2>
-        <button onClick={addQuantidade}> + </button>
+        <p onClick={addQuantidade}> + </p>
       </div>
 
       <div className={style.coluna}>
