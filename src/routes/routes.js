@@ -5,7 +5,11 @@ import Home from "../Pages/Home";
 import SubCategorias from "../Pages/SubCategorias";
 import Produtos from "../Pages/Produtos";
 
-function Rotas() {
+
+//Criação de rotas utilizando React-Router-Dom
+//Organiza a URN – Uniform Resource Name
+
+export default function Rotas() {
   return (
     <Router>
       <Routes>
@@ -17,5 +21,3 @@ function Rotas() {
 
   )
 }
-
-export default Rotas;

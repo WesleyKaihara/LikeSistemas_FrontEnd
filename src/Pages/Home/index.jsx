@@ -87,8 +87,12 @@ export default function Home() {
 
     let queryProdutosOrcamento = '';
 
-    orcamentoInfo.forEach(item => {
-      queryProdutosOrcamento += `INSERT INTO produtosOrcamento (PRODUTO,ORCAMENTO,QUANTIDADE) VALUES (${item.PRODUTO}, ${item.ORCAMENTO}, ${item.QUANTIDADE});`;
+    orcamentoInfo.forEach((item, index) => {
+      if (index === 0) {
+        queryProdutosOrcamento += `INSERT INTO produtosOrcamento (PRODUTO,ORCAMENTO,QUANTIDADE) VALUES (${item.PRODUTO}, ${item.ORCAMENTO}, ${item.QUANTIDADE})`;
+      } else {
+        queryProdutosOrcamento += `,(${item.PRODUTO}, ${item.ORCAMENTO}, ${item.QUANTIDADE});`;
+      }
     })
     requestOrcamento(queryProdutosOrcamento);
   }
@@ -106,50 +110,63 @@ export default function Home() {
     };
     fetch('/orcamentoProdutos/teste', requestOptions)
       .then(response => response.json())
-      .then(data => console.log(data.queries))
 
   }
 
   return (
-    <div>
-      <h1>Orçamento</h1>
+    <section className={style.orcamentos}>
+      <h1 className={style.title}>Orçamento</h1>
       <hr />
 
-      <select name="cliente" id="cliente" onClick={item => setComprador(item.target.options[item.target.selectedIndex].value)}>
-        <option>nome do cliente</option>
-        {((typeof clientes === 'undefined') ? (
-          <option>Loading ...</option>
-        ) : (
-          clientes.response.map((item) => (
-            <option key={item.ID} value={item.ID} >{item.NOME_CLIENTE}</option>
-          ))
-        )
-        )}
-      </select>
-
-      <h2>Lista de Produtos : </h2>
-
-      <div id="produtos">
-        {
-          ((typeof serverData === 'undefined') ? (
-            <p>Loading ...</p>
+      <div className={style.orcamentoContainer}>
+        <select name="cliente" id="cliente" onClick={item => setComprador(item.target.options[item.target.selectedIndex].value)}>
+          <option>nome do cliente</option>
+          {((typeof clientes === 'undefined') ? (
+            <option>Loading ...</option>
           ) : (
-            serverData.response.map((item) => (
-              <Produto
-                produto={item}
-                key={item.ID}
-                AddValorProdutos={(value, quantidade, id) => AddValorProdutos(value, quantidade, id)}
-              />
+            clientes.response.map((item) => (
+              <option key={item.ID} value={item.ID} >{item.NOME_CLIENTE}</option>
             ))
           )
-          )
-        }
+          )}
+        </select>
+
+        <h2>Lista de Produtos : </h2>
+
+        <table id="produtos" className={style.listaProdutos}>
+          <thead>
+            <tr>
+              <th>Nome</th>
+              <th>SubCategoria</th>
+              <th>Valor</th>
+              <th>Quantidade</th>
+              <th>Valor Final</th>
+            </tr>
+          </thead>
+          <tbody>
+            {
+              ((typeof serverData === 'undefined') ? (
+                <p>Loading ...</p>
+              ) : (
+                serverData.response.map((item) => (
+                  <Produto
+                    produto={item}
+                    key={item.ID}
+                    AddValorProdutos={(value, quantidade, id) => AddValorProdutos(value, quantidade, id)}
+                  />
+                ))
+              )
+              )
+            }
+          </tbody>
+        </table>
+
+        <button onClick={montaQuery}>Finalizar orçamento</button>
+
+        <p>Valor total: {valorTotal}</p>
+
       </div>
 
-      <button onClick={montaQuery}>Finalizar orçamento</button>
-
-      <p>Valor total: {valorTotal}</p>
-
-    </div >
+    </section >
   );
 }

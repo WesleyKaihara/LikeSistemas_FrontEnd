@@ -25,30 +25,30 @@ export default function Produto(props) {
   }
 
   return (
-    <div className={style.produto} >
+    <tr className={style.produto} >
 
-      <div className={style.coluna}>
+      <td className={style.coluna}>
         <h2>{NOME}</h2>
-      </div>
+      </td>
 
-      <div className={style.coluna}>
+      <td className={`${style.produto} ${style.center}`}>
         <h2>{SUBCATEGORIA}</h2>
-      </div>
+      </td>
 
-      <div className={style.coluna}>
-        <h2>{VALOR}</h2>
-      </div>
+      <td className={`${style.produto} ${style.center}`}>
+        <h2 className={style.valor}>{VALOR}</h2>
+      </td>
 
-      <div className={style.coluna}>
-        <p onClick={removeQuantidade}> - </p>
+      <td className={`${style.coluna} ${style.quantidade}`}>
+        <p onClick={removeQuantidade} id="incrementar-btn" className={style.btn}> - </p>
         <h2>{quantidade}</h2>
         <p onClick={addQuantidade}> + </p>
-      </div>
+      </td>
 
-      <div className={style.coluna}>
-        <h2> {VALOR * quantidade}</h2>
-      </div>
+      <td className={`${style.produto} ${style.center}`}>
+        <h2 className={style.valor}> {VALOR * quantidade}</h2>
+      </td>
 
-    </div >
+    </ tr>
   );
 }

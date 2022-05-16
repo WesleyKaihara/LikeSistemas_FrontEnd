@@ -1,11 +1,36 @@
+$btn :1.8em;
+$btn-background:#ff4242;
 .produto{
-  display: flex;
-  gap: 2vh;
-  background-color: #f1f1f1;
-  border: 1px solid #ccc;
   .coluna{
+    padding: 1vh;
+    .btn{
+      width: $btn;
+      height: $btn;
+      line-height: $btn;
+      background: $btn-background;
+      text-align: center;
+      cursor: pointer;
+      border-radius: 100%;
+      transition: all .8s ease;
+      font-weight: bold;
+      font-size:1em;
+      &:hover{
+        background:#ff6b6b;
+        transform: scale(1.2);
+      }
+    }
+  }
+  .quantidade{
     display: flex;
     align-items: center;
-    gap: 1vh;
+    justify-content: center;
+    gap: 1vw;
   }
+  .valor::before {
+    content:"R$ ";
+  }
+}
+
+.center{
+  text-align: center;
 }
