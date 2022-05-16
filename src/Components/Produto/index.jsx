@@ -31,21 +31,21 @@ export default function Produto(props) {
         <h2>{NOME}</h2>
       </td>
 
-      <td className={`${style.produto} ${style.center}`}>
+      <td className={`${style.coluna} ${style.center}`}>
         <h2>{SUBCATEGORIA}</h2>
       </td>
 
-      <td className={`${style.produto} ${style.center}`}>
+      <td className={`${style.coluna} ${style.center}`}>
         <h2 className={style.valor}>{VALOR}</h2>
       </td>
 
-      <td className={`${style.coluna} ${style.quantidade}`}>
-        <p onClick={removeQuantidade} id="incrementar-btn" className={style.btn}> - </p>
+      <td className={` ${style.quantidade} ${style.coluna}`}>
+        <p onClick={removeQuantidade} className={style.btn}> - </p>
         <h2>{quantidade}</h2>
-        <p onClick={addQuantidade}> + </p>
+        <p onClick={addQuantidade} className={`${style.btn} ${style.acrescentar}`}> + </p>
       </td>
 
-      <td className={`${style.produto} ${style.center}`}>
+      <td className={`${style.coluna} ${style.center}`}>
         <h2 className={style.valor}> {VALOR * quantidade}</h2>
       </td>
 

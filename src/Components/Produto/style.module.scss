@@ -2,7 +2,9 @@ $btn :1.8em;
 $btn-background:#ff4242;
 .produto{
   .coluna{
-    padding: 1vh;
+    border: 1px solid #ccc;
+    padding: 1.5vh;
+    height: 3.5vh;
     .btn{
       width: $btn;
       height: $btn;
@@ -11,7 +13,7 @@ $btn-background:#ff4242;
       text-align: center;
       cursor: pointer;
       border-radius: 100%;
-      transition: all .8s ease;
+      transition: all 800ms ease;
       font-weight: bold;
       font-size:1em;
       &:hover{
@@ -19,6 +21,10 @@ $btn-background:#ff4242;
         transform: scale(1.2);
       }
     }
+  }
+  .acrescentar{
+    background: rgb(0, 186, 0) !important;
+    color: #fff;
   }
   .quantidade{
     display: flex;

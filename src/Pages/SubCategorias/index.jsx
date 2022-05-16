@@ -17,10 +17,19 @@ export default function SubCategorias() {
   }, []);
 
   return (
-    <section>
-      <h1>Lista de SubCategorias</h1>
+    <section className={style.subCategorias}>
+      <header>
+        <h1 className={style.title}>Lista de SubCategorias</h1>
+      </header>
 
-      <form action="/subcategorias" method="POST">
+      <section className={style.subMenu}>
+        <ul>
+          <li><a href="/produtos"><p>Cadastrar Produto</p></a></li>
+          <li><a href="/"><p>Fazer Orçamento</p></a></li>
+        </ul>
+      </section>
+
+      <form action="/subcategorias" method="POST" className={style.form} autocomplete="off">
         <input
           type="text"
           name="nome"
@@ -30,14 +39,31 @@ export default function SubCategorias() {
         <button type="submit">Adicionar subCategoria</button>
       </form>
 
-      {((typeof serverData === 'undefined') ? (
-        <p>Loading ...</p>
-      ) : (
-        serverData.response.map((item) => (
-          <p key={item.ID}>{item.NOME}</p>
-        ))
-      )
-      )}
+      <main className={style.subCategoriasContainer}>
+        <table>
+          <thead>
+            <tr>
+              <th>ID</th>
+              <th>SubCategoria</th>
+            </tr>
+          </thead>
+          <tbody>
+            {((typeof serverData === 'undefined') ? (
+              <tr><td> Loading ...</td><td></td></tr>
+            ) : (
+              serverData.response.map((item) => (
+                <tr key={item.ID} className={style.tableRow}>
+                  <td>{item.ID}</td>
+                  <td>{item.NOME}</td>
+                </tr>
+
+              ))
+            )
+            )}
+          </tbody>
+        </table>
+      </main>
+
     </section>
   )
 }

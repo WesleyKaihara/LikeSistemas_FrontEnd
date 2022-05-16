@@ -20,6 +20,8 @@ export default function Home() {
   //Pegar Dados
   const [orcamentoInfo, setOrcamentoInfo] = useState([]);
 
+
+  //inicia o sistema com todas as informações do banco de dados via proxy
   useEffect(() => {
     fetch("/produtos")
       .then(
@@ -41,12 +43,10 @@ export default function Home() {
 
   }, []);
 
+  //Função para armazenar valor total do orçamento e adiciona valores em um array
   function AddValorProdutos(valor, quantidade, id) {
 
     setValorTotal(valorTotal + valor);
-
-    console.log(orcamentoInfo);
-
 
     //Verifica se produto ja existe no armazenamento
     orcamentoInfo.length > 0 ? (
@@ -70,7 +70,6 @@ export default function Home() {
             }
           )
         }
-
       })
 
       //primeiro orçamento (Não precisa verifcar orçamentos existentes)
@@ -82,11 +81,11 @@ export default function Home() {
     );
   }
 
-
+  //Função para montar query para adicionar valores ao banco de dados
   function montaQuery() {
-
     let queryProdutosOrcamento = '';
 
+    //percorre todos os dados armazenados 
     orcamentoInfo.forEach((item, index) => {
       if (index === 0) {
         queryProdutosOrcamento += `INSERT INTO produtosOrcamento (PRODUTO,ORCAMENTO,QUANTIDADE) VALUES (${item.PRODUTO}, ${item.ORCAMENTO}, ${item.QUANTIDADE})`;
@@ -94,12 +93,13 @@ export default function Home() {
         queryProdutosOrcamento += `,(${item.PRODUTO}, ${item.ORCAMENTO}, ${item.QUANTIDADE});`;
       }
     })
+
+    //Após montar a Query, envia a requisição para a API
     requestOrcamento(queryProdutosOrcamento);
   }
 
+  //Envia requisição para a API 
   function requestOrcamento(queryProdutosOrcamento) {
-
-    console.log(queryProdutosOrcamento);
 
     const requestOptions = {
       method: 'POST',
@@ -110,62 +110,77 @@ export default function Home() {
     };
     fetch('/orcamentoProdutos/teste', requestOptions)
       .then(response => response.json())
-
   }
+
 
   return (
     <section className={style.orcamentos}>
-      <h1 className={style.title}>Orçamento</h1>
-      <hr />
+      <header>
+        <h1 className={style.title}>Orçamento</h1>
+        <div className={style.clienteContainer}>
+          <h2>Nome do Cliente: </h2>
+          <select
+            className={style.cliente}
+            name="cliente"
+            id="cliente"
+            onClick={item => setComprador(item.target.options[item.target.selectedIndex].value)}>
+            <option className={style.option} >nome do cliente</option>
+            <option className={`${style.option} ${style.novoCliente} `} >Novo cliente</option>
+            {((typeof clientes === 'undefined') ? (
+              <option>Loading ...</option>
+            ) : (
+              clientes.response.map((item) => (
+                <option key={item.ID} value={item.ID} className={style.option}>{item.NOME_CLIENTE}</option>
+              ))
+            )
+            )}
+          </select>
+        </div>
+        <div>
+        </div>
+      </header>
+      <section className={style.subMenu}>
+        <ul>
+          <li><a href="/produtos"><p>Cadastrar Produto</p></a></li>
+          <li><a href="/subCategorias"><p>Cadastrar subCategoria</p></a></li>
+        </ul>
+      </section>
 
-      <div className={style.orcamentoContainer}>
-        <select name="cliente" id="cliente" onClick={item => setComprador(item.target.options[item.target.selectedIndex].value)}>
-          <option>nome do cliente</option>
-          {((typeof clientes === 'undefined') ? (
-            <option>Loading ...</option>
-          ) : (
-            clientes.response.map((item) => (
-              <option key={item.ID} value={item.ID} >{item.NOME_CLIENTE}</option>
-            ))
-          )
-          )}
-        </select>
+      <main>
+        <div className={style.orcamentoContainer}>
+          <h2 className={style.subTitle}>Lista de Produtos : </h2>
 
-        <h2>Lista de Produtos : </h2>
-
-        <table id="produtos" className={style.listaProdutos}>
-          <thead>
-            <tr>
-              <th>Nome</th>
-              <th>SubCategoria</th>
-              <th>Valor</th>
-              <th>Quantidade</th>
-              <th>Valor Final</th>
-            </tr>
-          </thead>
-          <tbody>
-            {
-              ((typeof serverData === 'undefined') ? (
-                <p>Loading ...</p>
-              ) : (
-                serverData.response.map((item) => (
-                  <Produto
-                    produto={item}
-                    key={item.ID}
-                    AddValorProdutos={(value, quantidade, id) => AddValorProdutos(value, quantidade, id)}
-                  />
-                ))
-              )
-              )
-            }
-          </tbody>
-        </table>
-
-        <button onClick={montaQuery}>Finalizar orçamento</button>
-
-        <p>Valor total: {valorTotal}</p>
-
-      </div>
+          <table id="produtos" className={style.listaProdutos}>
+            <thead>
+              <tr>
+                <th>Nome</th>
+                <th>SubCategoria</th>
+                <th>Valor</th>
+                <th>Quantidade</th>
+                <th>Valor Final</th>
+              </tr>
+            </thead>
+            <tbody>
+              {
+                ((typeof serverData === 'undefined') ? (
+                  <tr><td>Loading ... </td></tr>
+                ) : (
+                  serverData.response.map((item) => (
+                    <Produto
+                      produto={item}
+                      key={item.ID}
+                      AddValorProdutos={(value, quantidade, id) => AddValorProdutos(value, quantidade, id)}
+                    />
+                  ))
+                )
+                )
+              }
+            </tbody>
+          </table>
+          <p className={style.valorFinal}>Valor total: R$ {valorTotal.toFixed(2)}</p>
+          <button onClick={montaQuery} className={style.finaliza}>Finalizar Orçamento</button>
+        </div>
+      </main>
 
     </section >
   );

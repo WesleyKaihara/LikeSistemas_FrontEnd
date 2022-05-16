@@ -1,13 +1,108 @@
+$corPrincipal:#6700bc ;
+
 .orcamentos{
+  padding-top: 15vh;
+  header{
+    width: 100%;
+    position: fixed;
+    top: 0;
+    height: 15vh;
+    background:$corPrincipal;
+    align-items: center;
+    justify-content: center;
+    display: flex;
+  }
+  .subMenu{
+    background: $corPrincipal;
+    position: fixed;
+    width: 100%;
+    top: 15vh;
+    height: 6.5vh;
+    ul{
+      display: flex;
+      justify-content: right;
+      margin-right: 2%;
+      gap: 2vw;
+      a{
+        color: #fff;
+        text-decoration: none;
+        p{
+          background-color: #480082;
+          padding: 1vh 3vh;
+          border-radius: 10px 20px 15px 20px;
+          transition: all .5s ease;
+          &:hover{
+            transform: scale(1.1);
+          }
+        }
+      }
+    }
+  }
   .title{
     text-align: center;
     font-size: 2.2em;
+    color: #fff;
+  }
+  .subTitle{
+    font-size:3.5vh;
+    margin: 2vh 0 4vh;
+    color: $corPrincipal;
+  }
+  .cliente{
+    padding: 2vh 4vh;
+    font-size: 1em;
+    cursor: pointer;
+    .novoCliente{
+      background-color: rgb(0, 211, 0) !important;
+    }
+    .option{
+      background: #f1f1f1;
+      font-size: 1.2em;
+    }
+  }
+  .clienteContainer{
+    display: flex;
+    gap: 2vh;
+    align-items:center;
+    padding: .5vh 2vh;
+    color: #fff;
+    position: absolute;
+    top: 4vh;
+    right: 1vh;
   }
   .orcamentoContainer{
     width: 80%;
     margin: auto;
+    
     .listaProdutos{
       width: 100%;
+      th{
+        color: $corPrincipal;
+        border: 1px solid #ccc;
+        background-color: rgba(204, 204, 204, 0.489);
+        padding: 2vh 3vh;
+        font-weight: bold;
+      }
+    }
+    .finaliza{
+      padding: 1vh 3vh;
+      font-size: 2.5vh;
+      margin-top: 2vh;
+      background: $corPrincipal;
+      color: #fff;
+      font-weight: bold;
+      border: none;
+      border-radius: 15px 10px 20px 10px;
+      transition: all .5s ease;
+      cursor: pointer;
+      &:hover{
+        transform: scale(1.1);
+      }
+    }
+    .valorFinal{
+      font-size: 3vh;
+      margin-top: 2vh;
+      float: right;
     }
   }
 }
