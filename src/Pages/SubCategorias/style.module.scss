@@ -1,28 +1,13 @@
 $corPrincipal:#6700bc ;
 
 .subCategorias{
-  header {
-    width: 100%;
-    background-color: $corPrincipal;
-    position: fixed;
-    top: 0;
-    height: 15vh;
-    display: flex;
-    align-items: center;
-    justify-content: center;
-    .title{
-      text-align: center;
-      font-size: 2.2em;
-      color: #fff;
-    }
-  }
-
   &Container{
     margin:auto;
-    width: 50%;
+    width: 80%;
+    height: 65vh;
+    overflow: auto;
     table{
       width: 100%;
-      margin: auto;
       th{
         font-weight: bold;
         border: 1px solid #ccc;
@@ -42,39 +27,14 @@ $corPrincipal:#6700bc ;
   }
 }
 
-.subMenu{
-  position: fixed;
-  width: 100%;
-  top:6vh;
-  height: 6.5vh;
-  ul{
-    display: flex;
-    justify-content: right;
-    margin-right: 2%;
-    gap: 2vw;
-    a{
-      color: #fff;
-      text-decoration: none;
-      p{
-        background-color: #480082;
-        padding: 1vh 3vh;
-        border-radius: 10px 20px 15px 20px;
-        transition: all .5s ease;
-        &:hover{
-          transform: scale(1.1);
-        }
-      }
-    }
-  }
-}
-
 .form{
   padding: 2vh;
-  margin: 18vh auto 0;
+  margin: 18vh 9% 0;
   width: 50%;
   input{
     padding: 1.5vh;
     border: 1px solid #999;
+    width: 50%;
   }
   button{
     padding: 1.5vh;

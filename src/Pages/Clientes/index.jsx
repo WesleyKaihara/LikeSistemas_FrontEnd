@@ -1,13 +1,12 @@
 import { useEffect, useState } from 'react';
-import Header from '../../Components/Header';
 import style from './style.module.scss';
 
-export default function SubCategorias() {
+export default function Clientes() {
 
   const [serverData, setServerData] = useState();
 
   useEffect(() => {
-    fetch("/subCategorias")
+    fetch("/orcamento")
       .then(
         res => res.json()
       ).then(
@@ -18,28 +17,34 @@ export default function SubCategorias() {
   }, []);
 
   return (
-    <section className={style.subCategorias}>
+    <section className={style.Clientes}>
+      <header>
+        <h1 className={style.title}>Lista de Clientes</h1>
+      </header>
 
-      <Header
-        title="Lista de SubCategorias"
-      />
+      <section className={style.subMenu}>
+        <ul>
+          <li><a href="/produtos"><p>Cadastrar Produto</p></a></li>
+          <li><a href="/"><p>Fazer Orçamento</p></a></li>
+        </ul>
+      </section>
 
       <form action="/subcategorias" method="POST" className={style.form} autoComplete="off">
         <input
           type="text"
           name="nome"
           id="nome"
-          placeholder='Nome da subCategoria'
+          placeholder='Nome do cliente'
           required />
-        <button type="submit">Adicionar subCategoria</button>
+        <button type="submit">Adicionar Cliente</button>
       </form>
 
-      <main className={style.subCategoriasContainer}>
+      <main className={style.ClientesContainer}>
         <table>
           <thead>
             <tr>
               <th>ID</th>
-              <th>SubCategoria</th>
+              <th>Cliente</th>
             </tr>
           </thead>
           <tbody>
@@ -49,8 +54,9 @@ export default function SubCategorias() {
               serverData.response.map((item) => (
                 <tr key={item.ID} className={style.tableRow}>
                   <td>{item.ID}</td>
-                  <td>{item.NOME}</td>
+                  <td>{item.NOME_CLIENTE}</td>
                 </tr>
+
               ))
             )
             )}

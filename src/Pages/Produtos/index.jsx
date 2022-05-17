@@ -1,6 +1,8 @@
 import { useEffect, useState } from 'react';
 import style from './style.module.scss';
 
+import Header from '../../Components/Header';
+
 export default function SubCategorias() {
 
   const [serverData, setServerData] = useState();
@@ -17,45 +19,63 @@ export default function SubCategorias() {
   }, []);
 
   return (
-    <section>
+    <section className={style.produtos}>
 
-      <h1>Lista de Produtos</h1>
+      <Header
+        title="Lista de Produtos" />
+      <main>
+        <table>
+          <thead>
+            <tr>
+              <th>Id</th>
+              <th>Nome</th>
+              <th>Valor</th>
+            </tr>
+          </thead>
+          <tbody>
+            {((typeof serverData === 'undefined') ? (
+              <tr><td> Loading ...</td></tr>
+            ) : (
+              serverData.response.map((item) => (
+                <tr key={item.ID} className={style.tableRow}>
+                  <td>{item.ID}</td>
+                  <td>{item.NOME}</td>
+                  <td>R$ {item.VALOR}</td>
+                </tr>
 
-      <form action="/produtos" method="POST" autoComplete="off">
-        <input
-          type="text"
-          name="nome"
-          id="nome"
-          placeholder='Nome do produto'
-          required />
-        <input
-          type="number"
-          name="valor"
-          id="valor"
-          placeholder='Valor do Produto'
-          required />
-        <input
-          type="number"
-          name="idSubCategoria"
-          id="idSubCategoria"
-          placeholder='Id da subCategoria'
-          required />
+              ))
+            )
+            )}
+          </tbody>
+        </table>
 
-        <button type="submit">Adicionar produto</button>
-      </form>
+        <form action="/produtos" method="POST" autoComplete="off" className={style.form}>
+          <label htmlFor="nome">Nome Produto</label>
+          <input
+            type="text"
+            name="nome"
+            id="nome"
+            placeholder='Nome do produto'
+            required />
+          <label htmlFor="valor">Valor</label>
+          <input
+            type="number"
+            name="valor"
+            id="valor"
+            placeholder='Valor do Produto'
+            required />
+          <label htmlFor="idSubCategoria">SubCategoria</label>
+          <input
+            type="number"
+            name="idSubCategoria"
+            id="idSubCategoria"
+            placeholder='Id da subCategoria'
+            required />
 
-      {((typeof serverData === 'undefined') ? (
-        <p>Loading ...</p>
-      ) : (
-        serverData.response.map((item) => (
-          <div key={item.ID}>
-            <p>{item.NOME}</p>
-            <p>{item.VALOR}</p>
-          </div>
+          <button type="submit">Adicionar produto</button>
+        </form>
 
-        ))
-      )
-      )}
+      </main>
 
     </section>
   )

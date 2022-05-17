@@ -1,0 +1,103 @@
+$corPrincipal:#6700bc ;
+
+.produtos{
+  width: 100%;
+  main{
+    width: 70%;
+    margin: 18vh auto 5vh;
+    display: flex;
+    justify-content:space-around;
+    table {
+      width: 60%;
+      th{
+        font-weight: bold;
+        border: 1px solid #ccc;
+        padding: 1.5vh;
+        background-color: rgba(204, 204, 204, 0.489);
+        color: $corPrincipal;
+      }
+      .tableRow{
+        text-align: center;
+        td{
+          padding: 1.5vh;
+          border: 1px solid #ccc;
+        }
+      }
+    }
+  }
+
+  .form{
+    display: flex;
+    flex-direction: column;
+    width: 30%;
+    label{
+      margin-top: 1.5vh;
+      font-size: 1.2em;
+    }
+    input{
+      margin-top: 1vh;
+      padding: 1vh 2vh ;
+    }
+    button{
+      margin-top: 2vh;
+      padding:2vh;
+      background: $corPrincipal;
+      border: none;
+      border-radius: 30px;
+      color: #fff;
+      transition: all .5s ease;
+      cursor: pointer;
+      &:hover{
+        transform: scale(1.05);
+      }
+    }
+  }
+}
+
+
+.subMenu{
+  position: fixed;
+  width: 100%;
+  top:6vh;
+  height: 6.5vh;
+  ul{
+    display: flex;
+    justify-content: right;
+    margin-right: 2%;
+    gap: 2vw;
+    a{
+      color: #fff;
+      text-decoration: none;
+      p{
+        background-color: #480082;
+        padding: 1vh 3vh;
+        border-radius: 10px 20px 15px 20px;
+        transition: all .5s ease;
+        &:hover{
+          transform: scale(1.1);
+        }
+      }
+    }
+  }
+}
+
+@media (max-width:950px) {
+  .produtos{
+    main{
+      width: 100% !important;
+      margin: 28vh auto 8vh !important;
+      flex-direction: column;
+      table {
+        width: 90% !important;
+        margin: 5vh auto 0;
+      }
+    }
+  
+    .form{
+      margin: 5vh auto 0 ;
+      width: 90% !important;
+    }
+  
+  }
+  
+}

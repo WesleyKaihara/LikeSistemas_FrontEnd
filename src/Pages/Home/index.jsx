@@ -113,6 +113,14 @@ export default function Home() {
   }
 
 
+  function getCliente(option) {
+    if (option.target.options[option.target.selectedIndex].value === 'Novo cliente') {
+      window.location.href = "/clientes";
+    } else {
+      // setComprador(item.target.options[item.target.selectedIndex].value)
+    }
+  }
+
   return (
     <section className={style.orcamentos}>
       <header>
@@ -123,9 +131,14 @@ export default function Home() {
             className={style.cliente}
             name="cliente"
             id="cliente"
-            onClick={item => setComprador(item.target.options[item.target.selectedIndex].value)}>
-            <option className={style.option} >nome do cliente</option>
-            <option className={`${style.option} ${style.novoCliente} `} >Novo cliente</option>
+            onClick={item => getCliente(item)}>
+
+            <option
+              className={style.option}>Selecionar cliente</option>
+            <option
+              className={`${style.option} ${style.novoCliente} `} >Novo cliente</option>
+
+
             {((typeof clientes === 'undefined') ? (
               <option>Loading ...</option>
             ) : (
@@ -134,11 +147,11 @@ export default function Home() {
               ))
             )
             )}
+
           </select>
         </div>
-        <div>
-        </div>
       </header>
+
       <section className={style.subMenu}>
         <ul>
           <li><a href="/produtos"><p>Cadastrar Produto</p></a></li>
