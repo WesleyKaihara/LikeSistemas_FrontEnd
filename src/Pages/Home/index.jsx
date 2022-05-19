@@ -121,11 +121,12 @@ export default function Home() {
         queries: queryProdutosOrcamento
       })
     };
-    fetch('/orcamentoProdutos/teste', requestOptions)
+    fetch('/orcamentoProdutos/criar', requestOptions)
       .then(response => response.json())
 
     setOrcamentoInfo([]);
     setComprador([]);
+    window.parent.location = window.parent.location.href;
   }
 
 
