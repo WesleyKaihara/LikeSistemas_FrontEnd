@@ -49,3 +49,25 @@ $corPrincipal:#6700bc ;
     }
   }
 }
+
+.deletar{
+  color: red;
+}
+
+.deletarBtn{
+  color: red;
+  font-weight: bold;
+  cursor: pointer;
+  transition: all .5s ease;
+  &:hover{
+    font-size: 1.2em;
+  }
+}
+
+@media(max-width:950px){
+  .form{
+    padding: 2vh 0;
+    margin: 17vh 0 0;
+    width: 100%;
+  }
+}

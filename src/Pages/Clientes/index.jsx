@@ -1,4 +1,5 @@
 import { useEffect, useState } from 'react';
+import Header from '../../Components/Header';
 import style from './style.module.scss';
 
 export default function Clientes() {
@@ -18,18 +19,16 @@ export default function Clientes() {
 
   return (
     <section className={style.Clientes}>
-      <header>
-        <h1 className={style.title}>Lista de Clientes</h1>
-      </header>
 
-      <section className={style.subMenu}>
-        <ul>
-          <li><a href="/produtos"><p>Cadastrar Produto</p></a></li>
-          <li><a href="/"><p>Fazer Orçamento</p></a></li>
-        </ul>
-      </section>
+      <Header
+        title="Lista de clientes" />
 
-      <form action="/subcategorias" method="POST" className={style.form} autoComplete="off">
+      <form
+        action="/subcategorias"
+        method="POST"
+        className={style.form}
+        autoComplete="off"
+        data-testid="form-subCategorias">
         <input
           type="text"
           name="nome"
@@ -40,7 +39,7 @@ export default function Clientes() {
       </form>
 
       <main className={style.ClientesContainer}>
-        <table>
+        <table name="tabelaSubCategoria" data-testid="table-subCategorias">
           <thead>
             <tr>
               <th>ID</th>

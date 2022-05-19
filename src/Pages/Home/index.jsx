@@ -2,6 +2,7 @@ import style from './style.module.scss';
 
 import React, { useEffect, useState } from 'react';
 import Produto from '../../Components/Produto';
+import Header from '../../Components/Header';
 
 export default function Home() {
 
@@ -41,7 +42,18 @@ export default function Home() {
         }
       )
 
-  }, []);
+    getCliente(comprador)
+  }, [comprador]);
+
+
+  function getCliente(comprador) {
+
+    if (orcamentoInfo.length > 0) {
+      orcamentoInfo.forEach((produto, index) => {
+        orcamentoInfo[index].ORCAMENTO = comprador;
+      })
+    }
+  }
 
   //Função para armazenar valor total do orçamento e adiciona valores em um array
   function AddValorProdutos(valor, quantidade, id) {
@@ -71,7 +83,6 @@ export default function Home() {
           )
         }
       })
-
       //primeiro orçamento (Não precisa verifcar orçamentos existentes)
     ) : orcamentoInfo.push({
       PRODUTO: id,
@@ -98,9 +109,11 @@ export default function Home() {
     requestOrcamento(queryProdutosOrcamento);
   }
 
+
   //Envia requisição para a API 
   function requestOrcamento(queryProdutosOrcamento) {
 
+    console.log(comprador);
     const requestOptions = {
       method: 'POST',
       headers: { 'Content-Type': 'application/json' },
@@ -110,28 +123,30 @@ export default function Home() {
     };
     fetch('/orcamentoProdutos/teste', requestOptions)
       .then(response => response.json())
+
+    setOrcamentoInfo([]);
+    setComprador([]);
   }
 
-
-  function getCliente(option) {
-    if (option.target.options[option.target.selectedIndex].value === 'Novo cliente') {
-      window.location.href = "/clientes";
-    } else {
-      // setComprador(item.target.options[item.target.selectedIndex].value)
-    }
-  }
 
   return (
     <section className={style.orcamentos}>
-      <header>
-        <h1 className={style.title}>Orçamento</h1>
+      <Header
+        title="Orçamentos" />
+
+      <main>
+
         <div className={style.clienteContainer}>
-          <h2>Nome do Cliente: </h2>
           <select
             className={style.cliente}
             name="cliente"
             id="cliente"
-            onClick={item => getCliente(item)}>
+            onClick={item =>
+              //verifica campo e redireciona para criação de novo cliente
+              (item.target.options[item.target.selectedIndex].value === 'Novo cliente') ?
+                window.location.href = "/clientes" :
+                setComprador(item.target.options[item.target.selectedIndex].value)
+            }>
 
             <option
               className={style.option}>Selecionar cliente</option>
@@ -150,16 +165,7 @@ export default function Home() {
 
           </select>
         </div>
-      </header>
 
-      <section className={style.subMenu}>
-        <ul>
-          <li><a href="/produtos"><p>Cadastrar Produto</p></a></li>
-          <li><a href="/subCategorias"><p>Cadastrar subCategoria</p></a></li>
-        </ul>
-      </section>
-
-      <main>
         <div className={style.orcamentoContainer}>
           <h2 className={style.subTitle}>Lista de Produtos : </h2>
 
@@ -167,10 +173,10 @@ export default function Home() {
             <thead>
               <tr>
                 <th>Nome</th>
-                <th>SubCategoria</th>
-                <th>Valor</th>
+                <th>Categoria</th>
+                <th>Valor (unid)</th>
                 <th>Quantidade</th>
-                <th>Valor Final</th>
+                <th className={style.valorMobile}>Valor Final</th>
               </tr>
             </thead>
             <tbody>
@@ -190,8 +196,10 @@ export default function Home() {
               }
             </tbody>
           </table>
-          <p className={style.valorFinal}>Valor total: R$ {valorTotal.toFixed(2)}</p>
-          <button onClick={montaQuery} className={style.finaliza}>Finalizar Orçamento</button>
+          <div className={style.valorfinalContainer}>
+            <p className={style.valorFinal}>Valor total: R$ {valorTotal.toFixed(2)}</p>
+            <button onClick={montaQuery} className={style.finaliza}>Finalizar Orçamento</button>
+          </div>
         </div>
       </main>
 

@@ -3,9 +3,10 @@ import style from './style.module.scss';
 
 import Header from '../../Components/Header';
 
-export default function SubCategorias() {
+export default function Produtos() {
 
   const [serverData, setServerData] = useState();
+  const [categorias, setCategorias] = useState();
 
   useEffect(() => {
     fetch("/produtos")
@@ -16,7 +17,38 @@ export default function SubCategorias() {
           setServerData(data);
         }
       )
+
+    fetch("/subCategorias")
+      .then(
+        res => res.json()
+      ).then(
+        data => {
+          setCategorias(data);
+        }
+      )
+
   }, []);
+
+  function deleteProduto(item) {
+
+    const requestOptions = {
+      method: 'DELETE',
+      headers: { 'Content-Type': 'application/json' },
+      body: JSON.stringify({
+        idProduto: item.target.id
+      })
+    };
+    fetch('/produtos', requestOptions)
+      .then(response => response.json())
+
+    item.target.style.color = 'red';
+    let itens = document.getElementsByName(item.target.id);
+
+    itens.forEach((item, index) => {
+      item.style.color = 'red';
+    })
+  }
+
 
   return (
     <section className={style.produtos}>
@@ -30,6 +62,7 @@ export default function SubCategorias() {
               <th>Id</th>
               <th>Nome</th>
               <th>Valor</th>
+              <th>Deletar</th>
             </tr>
           </thead>
           <tbody>
@@ -38,11 +71,15 @@ export default function SubCategorias() {
             ) : (
               serverData.response.map((item) => (
                 <tr key={item.ID} className={style.tableRow}>
-                  <td>{item.ID}</td>
-                  <td>{item.NOME}</td>
-                  <td>R$ {item.VALOR}</td>
+                  <td name={item.ID}>{item.ID}</td>
+                  <td name={item.ID}>{item.NOME}</td>
+                  <td name={item.ID}>R$ {item.VALOR}</td>
+                  <td
+                    onClick={(item) => deleteProduto(item)}
+                    className={style.deletarBtn}
+                    id={item.ID}
+                  >X</td>
                 </tr>
-
               ))
             )
             )}
@@ -65,12 +102,24 @@ export default function SubCategorias() {
             placeholder='Valor do Produto'
             required />
           <label htmlFor="idSubCategoria">SubCategoria</label>
-          <input
-            type="number"
+          <select
+            className={style.categorias}
             name="idSubCategoria"
-            id="idSubCategoria"
-            placeholder='Id da subCategoria'
-            required />
+            id="idSubCategoria">
+
+            <option
+              className={style.option}>Selecionar SubCategoria</option>
+
+            {((typeof categorias === 'undefined') ? (
+              <option>Loading ...</option>
+            ) : (
+              categorias.response.map((item) => (
+                <option key={item.ID} value={item.ID} className={style.option}>{item.NOME}</option>
+              ))
+            )
+            )}
+
+          </select>
 
           <button type="submit">Adicionar produto</button>
         </form>

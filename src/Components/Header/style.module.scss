@@ -10,6 +10,7 @@ $corPrincipal:#6700bc ;
   align-items: center;
   position: fixed;
   top: 0;
+  z-index: 9999;
   .title{
     font-size: 4vh;
     color: #fff;
@@ -35,23 +36,45 @@ $corPrincipal:#6700bc ;
       }
     }
   } 
+  .mobileMenu{
+    font-size: 8vh;
+    color: #fff;
+    cursor: pointer;
+    display: none;
+  }
 }
 
-@media (max-width:900px){
+.visivel{
+  display: flex !important;
+}
+
+@media (max-width:950px){
   .header{
     flex-direction: column;
     height: inherit;
     padding: 5vh 0 2vh;
+    .title{
+      margin-left: 0;
+    }
     .menu{
-      margin-top: 3vh;
-      width: 100%;
+      margin: 3vh 0 0;
       flex-direction: column;
       p{
-        padding: 2.5vh;
+        padding: 2.5vh 8vh;
       }
     }
     .coluna{
-      width: 70%;
+      display: none;
+      margin: 0;
     }
+  }
+  .mobileContainer{
+    width: 90%;
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+  }
+  .mobileMenu{
+    display: block !important;
   }
 }

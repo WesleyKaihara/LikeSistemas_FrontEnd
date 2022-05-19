@@ -51,6 +51,20 @@ $corPrincipal:#6700bc ;
         transform: scale(1.05);
       }
     }
+    .categorias{
+      padding: 1vh 2vh;
+      margin-top: 1.5vh;
+    }
+  }
+}
+
+.deletarBtn{
+  color: red;
+  font-weight: bold;
+  cursor: pointer;
+  transition: all .5s ease;
+  &:hover{
+    transform: scale(1.5);
   }
 }
 
@@ -85,7 +99,7 @@ $corPrincipal:#6700bc ;
   .produtos{
     main{
       width: 100% !important;
-      margin: 28vh auto 8vh !important;
+      margin: 14vh auto 8vh !important;
       flex-direction: column;
       table {
         width: 90% !important;

@@ -1,155 +1,76 @@
 $corPrincipal:#6700bc ;
 
 .orcamentos{
-  padding-top: 15vh;
-  header{
-    width: 100%;
-    position: fixed;
-    top: 0;
-    height: 15vh;
-    background:$corPrincipal;
-    align-items: center;
-    justify-content: center;
-    display: flex;
-  }
-  .subMenu{
-    background: $corPrincipal;
-    position: fixed;
-    width: 100%;
-    top: 15vh;
-    height: 6.5vh;
-    ul{
-      display: flex;
-      justify-content: right;
-      margin-right: 2%;
-      gap: 2vw;
-      a{
-        color: #fff;
-        text-decoration: none;
-        p{
-          background-color: #480082;
-          padding: 1vh 3vh;
-          border-radius: 10px 20px 15px 20px;
-          transition: all .5s ease;
-          &:hover{
-            transform: scale(1.1);
-          }
-        }
-      }
-    }
-  }
-  .title{
-    text-align: center;
-    font-size: 2.2em;
-    color: #fff;
+  .orcamentoContainer{
+    width: 60%;
+    margin: 0 auto;
   }
   .subTitle{
-    font-size:3.5vh;
-    margin: 2vh 0 4vh;
-    color: $corPrincipal;
+    font-size: 4vh;
+    margin-bottom: 2vh;
+    font-weight: bold;
   }
-  .cliente{
-    padding: 2vh 4vh;
-    font-size: 1em;
-    cursor: pointer;
-    .novoCliente{
-      background-color: #7300d1 !important;
-      color: #fff;
-    }
-    .option{
-      background: #f1f1f1;
-      font-size: 1.2em;
-    }
-  }
-  .clienteContainer{
-    display: flex;
-    gap: 2vh;
-    align-items:center;
-    padding: .5vh 2vh;
-    color: #fff;
-    position: absolute;
-    top: 4vh;
-    right: 1vh;
-  }
-  .orcamentoContainer{
-    width: 80%;
-    margin: auto;
-    
-    .listaProdutos{
-      width: 100%;
-      th{
-        color: $corPrincipal;
-        border: 1px solid #ccc;
-        background-color: rgba(204, 204, 204, 0.489);
-        padding: 2vh 3vh;
-        font-weight: bold;
-      }
-    }
-    .finaliza{
-      padding: 1vh 3vh;
-      font-size: 2.5vh;
-      margin-top: 2vh;
-      background: $corPrincipal;
-      color: #fff;
+  .listaProdutos{
+    width: 100%;
+    th{
       font-weight: bold;
-      border: none;
-      border-radius: 15px 10px 20px 10px;
-      transition: all .5s ease;
-      cursor: pointer;
-      &:hover{
-        transform: scale(1.1);
-      }
+      border: 1px solid #ccc;
+      padding: 2vh 0;
+      background-color: rgba(204, 204, 204, 0.489);
+      color: $corPrincipal;
     }
-    .valorFinal{
-      font-size: 3vh;
-      margin-top: 2vh;
-      float: right;
+  }
+  .finaliza{
+    margin-top: 2vh;
+    background: $corPrincipal;
+    color: #fff;
+    padding: 2vh 4.5vh;
+    border: none;
+    border-radius: 50px;
+    font-weight: bold;
+    transition: all .5s ease;
+    cursor: pointer;
+    &:hover{
+      transform: scale(1.05);
     }
+  }
+  .valorfinalContainer{
+    text-align: center;
+    margin-top: 3vh;
   }
 }
 
-@media (max-width:950px) {
+.clienteContainer{
+  width: 60%;
+  margin: 17vh auto 3vh;
+  select{
+    padding: 1vh 5vh;
+  }
+}
+
+@media(max-width:950px){
   .orcamentos{
-    header{
-      height: 20vh !important;
-      padding: 5vh;
-      flex-direction: column;
-      gap: 4vh;
-      .title{
-        font-size: 2.5em !important;
-      }
-    }
-    .subMenu{
-      top: 28vh !important;
-      display: flex;
-      justify-content: center;
-      padding: 2vh 0 8vh;
-      ul{
-        justify-content: center !important;
-        margin: 0 !important;
-        flex-direction: column;
-        width: 50%;
-        p{
-          padding: 2vh !important;
-        }
-      }
-    }
     .clienteContainer{
-      position: initial !important;
-    }
-    .subTitle{
-      font-size:3.5vh;
-      margin: 12vh 0 4vh !important;
-      color: $corPrincipal;
+      width: 100%;
+      text-align: center;
+      select{
+        padding: 2.5vh 5vh;
+        width: 90%;
+      }
     }
     .orcamentoContainer{
-      padding: 0 0 10vh;
       width: 100% !important;
+      margin: 5vh auto;
+      .subTitle{
+        margin-left: 1vh;
+      }
     }
-    main{
-      margin-top:32vh !important;
+    .valorfinalContainer{
+      text-align: center;
+      margin-top: 3vh;
+    }
+    .valorMobile{
+      display: none;
     }
   }
-  
-  
 }

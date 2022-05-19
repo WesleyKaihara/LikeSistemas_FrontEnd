@@ -17,6 +17,25 @@ export default function SubCategorias() {
       )
   }, []);
 
+  function deleteSubCategoria(item) {
+    const requestOptions = {
+      method: 'DELETE',
+      headers: { 'Content-Type': 'application/json' },
+      body: JSON.stringify({
+        idSubCategoria: item.target.id
+      })
+    };
+    fetch('/subCategorias', requestOptions)
+      .then(response => response.json())
+
+    item.target.style.color = 'red';
+    let itens = document.getElementsByName(item.target.id);
+    itens.forEach((item, index) => {
+      item.style.color = 'red';
+    })
+
+  }
+
   return (
     <section className={style.subCategorias}>
 
@@ -24,7 +43,12 @@ export default function SubCategorias() {
         title="Lista de SubCategorias"
       />
 
-      <form action="/subcategorias" method="POST" className={style.form} autoComplete="off">
+      <form
+        action="/subcategorias"
+        method="POST"
+        className={style.form}
+        autoComplete="off"
+      >
         <input
           type="text"
           name="nome"
@@ -40,6 +64,7 @@ export default function SubCategorias() {
             <tr>
               <th>ID</th>
               <th>SubCategoria</th>
+              <th>Deletar</th>
             </tr>
           </thead>
           <tbody>
@@ -48,8 +73,13 @@ export default function SubCategorias() {
             ) : (
               serverData.response.map((item) => (
                 <tr key={item.ID} className={style.tableRow}>
-                  <td>{item.ID}</td>
-                  <td>{item.NOME}</td>
+                  <td name={item.ID}>{item.ID}</td>
+                  <td name={item.ID}>{item.NOME}</td>
+                  <td
+                    onClick={item => deleteSubCategoria(item)}
+                    className={style.deletarBtn}
+                    id={item.ID}
+                  >X</td>
                 </tr>
               ))
             )

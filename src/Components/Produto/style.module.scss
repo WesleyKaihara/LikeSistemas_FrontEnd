@@ -1,14 +1,15 @@
-$btn :1.8em;
+$btn :2.5em;
 $btn-background:#ff4242;
 .produto{
   .coluna{
     border: 1px solid #ccc;
     padding: 1.5vh;
-    height: 3.5vh;
     .btn{
       width: $btn;
       height: $btn;
-      line-height: $btn;
+      display: flex;
+      justify-content: center;
+      align-items: center;
       background: $btn-background;
       text-align: center;
       cursor: pointer;
@@ -16,6 +17,7 @@ $btn-background:#ff4242;
       transition: all 800ms ease;
       font-weight: bold;
       font-size:1em;
+      color: #fff;
       &:hover{
         background:#ff6b6b;
         transform: scale(1.2);
@@ -30,7 +32,7 @@ $btn-background:#ff4242;
     display: flex;
     align-items: center;
     justify-content: center;
-    gap: 1vw;
+    gap: 2vw;
   }
   .valor::before {
     content:"R$ ";
@@ -41,13 +43,16 @@ $btn-background:#ff4242;
   text-align: center;
 }
 
-.colunaP{
-  width: 15%;
+@media(max-width:950px){
+  .coluna{
+    font-size: 1.5vh;
+  }
+  .valorMobile{
+    display: none;
+  }
+  .btn{
+    width: 3em !important;
+    height: 3em !important;
+    line-height: normal;
+  }
 }
-.colunaM{
-  width: 20%;
-}
-.coluna{
-  width: 35%;
-}
-

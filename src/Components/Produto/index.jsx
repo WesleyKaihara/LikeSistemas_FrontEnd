@@ -1,4 +1,4 @@
-import { useEffect, useState } from 'react';
+import { useState } from 'react';
 import style from './style.module.scss';
 
 
@@ -31,7 +31,7 @@ export default function Produto(props) {
         <h2 >{NOME}</h2>
       </td>
 
-      <td className={`${style.coluna} ${style.center}`}>
+      <td className={`${style.coluna} ${style.center} `}>
         <h2>{SUBCATEGORIA}</h2>
       </td>
 
@@ -39,15 +39,13 @@ export default function Produto(props) {
         <h2 className={style.valor}>{VALOR}</h2>
       </td>
 
-      <td className={style.coluna}>
-        <div className={style.quantidade}>
-          <p onClick={removeQuantidade} className={style.btn}> - </p>
-          <h2>{quantidade}</h2>
-          <p onClick={addQuantidade} className={`${style.btn} ${style.acrescentar}`}> + </p>
-        </div>
+      <td className={`${style.coluna} ${style.quantidade}`}>
+        <p onClick={removeQuantidade} className={style.btn}> - </p>
+        <h2 data-testid="quantidade">{quantidade}</h2>
+        <p onClick={addQuantidade} className={`${style.btn} ${style.acrescentar}`}> + </p>
       </td>
 
-      <td className={`${style.coluna} ${style.center}`}>
+      <td className={`${style.coluna} ${style.center} ${style.valorMobile}`}>
         <h2 className={style.valor}> {(VALOR * quantidade).toFixed(2)}</h2>
       </td>
 

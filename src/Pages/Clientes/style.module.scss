@@ -1,22 +1,6 @@
 $corPrincipal:#6700bc ;
 
 .Clientes{
-  header {
-    width: 100%;
-    background-color: $corPrincipal;
-    position: fixed;
-    top: 0;
-    height: 15vh;
-    display: flex;
-    align-items: center;
-    justify-content: center;
-    .title{
-      text-align: center;
-      font-size: 2.2em;
-      color: #fff;
-    }
-  }
-
   &Container{
     margin:auto;
     width: 50%;
@@ -70,8 +54,7 @@ $corPrincipal:#6700bc ;
 
 .form{
   padding: 2vh;
-  margin: 18vh auto 0;
-  width: 50%;
+  margin: 18vh 24% 0;
   input{
     padding: 1.5vh;
     border: 1px solid #999;
@@ -88,4 +71,25 @@ $corPrincipal:#6700bc ;
       transform: scale(1.05);
     }
   }
+}
+
+@media(max-width:950px){
+  .Clientes{
+    .form{
+      margin: 18vh auto 0;
+      width: 90%;
+      display: flex;
+      input{
+        width: 50%;
+      }
+      button{
+        width: 50%;
+      }
+    }
+    &Container{
+      width: 90%;
+    }
+  }
+ 
+
 }

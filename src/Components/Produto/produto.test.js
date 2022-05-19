@@ -1,4 +1,4 @@
-import { getByTestId, render, screen } from '@testing-library/react';
+import { act, fireEvent, render, screen } from '@testing-library/react';
 
 import Produto from '.';
 
@@ -34,18 +34,47 @@ describe('Componente Produto', () => {
     expect(screen.getByText(1.5)).toBeInTheDocument();
   });
 
-  test('Botão Acrescentar quantidade está sendo renderizado', () => {
+  test('Botão Acrescentar quantidade está sendo renderizado e funcionando', () => {
     render(<Produto
       produto={produto}
+      AddValorProdutos={() => { }}
     />)
-    expect(screen.getByText('+')).toBeInTheDocument();
+
+
+    const btn = screen.getByText('+')
+
+    expect(btn).toBeInTheDocument();
+
+    expect(screen.getByText("0")).toBeInTheDocument();
+    fireEvent.click(btn);
+    fireEvent.click(btn);
+    expect(screen.getByText("2")).toBeInTheDocument();
+
   });
 
   test('Botão Decrementar quantidade está sendo renderizado', () => {
     render(<Produto
       produto={produto}
+      AddValorProdutos={() => { }}
     />)
-    expect(screen.getByText('-')).toBeInTheDocument();
+
+    const btnAcrescentar = screen.getByText('+')
+    const btn = screen.getByText('-');
+
+    expect(btn).toBeInTheDocument();
+
+    expect(screen.getByText("0")).toBeInTheDocument();
+
+    fireEvent.click(btnAcrescentar);
+    fireEvent.click(btnAcrescentar);
+
+    expect(screen.getByText("2")).toBeInTheDocument();
+
+    fireEvent.click(btn);
+
+    expect(screen.getByText("1")).toBeInTheDocument();
+
+
   });
 
 })
